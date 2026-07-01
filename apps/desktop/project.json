@@ -1,0 +1,38 @@
+{
+  "name": "desktop",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/desktop/src",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        { "target": "build", "projects": ["app"] },
+        { "target": "serve", "projects": ["app"] }
+      ],
+      "options": {
+        "command": "\"node_modules/.bin/electrobun\" dev"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "dependsOn": [{ "target": "build", "projects": ["app"] }],
+      "defaultConfiguration": "stable",
+      "options": {
+        "command": "\"node_modules/.bin/electrobun\" build --env=stable"
+      },
+      "configurations": {
+        "dev": {
+          "command": "\"node_modules/.bin/electrobun\" build --env=dev"
+        },
+        "canary": {
+          "command": "\"node_modules/.bin/electrobun\" build --env=canary"
+        },
+        "stable": {
+          "command": "\"node_modules/.bin/electrobun\" build --env=stable"
+        }
+      }
+    }
+  }
+}

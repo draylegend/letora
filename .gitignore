@@ -36,6 +36,8 @@ Thumbs.db
 .claude/worktrees
 .claude/settings.local.json
 /.sass-cache
+/artifacts
+/build
 /connect.lock
 /coverage
 /libpeerconnection.log
