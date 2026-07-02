@@ -8,6 +8,24 @@ bun run dev   # runs `nx serve app` (Angular dev server, HMR) + `electrobun dev`
 
 The desktop shell (Bun main process, window/menu/tray code) lives in `apps/desktop/src`, separate from the Angular UI in `apps/app` — they're different runtimes with different tsconfigs. Edit `apps/desktop/src/index.ts` and restart `electrobun dev` manually to see changes — do not use `electrobun dev --watch` on Windows, see below.
 
+## Releasing
+
+```bash
+bun run release              # every release after the first
+bun run release -- --dry-run # preview what it would do, changes nothing
+```
+
+This runs `nx release --skip-publish`, which bumps the version (from Conventional Commits since the last tag), writes `CHANGELOG.md`, commits, tags (`vX.Y.Z`), pushes, and creates the GitHub Release itself (via your authenticated `gh` CLI or a `GITHUB_TOKEN`/`GH_TOKEN` env var) — no npm/Docker publish step runs. That tag push then triggers [`.github/workflows/release.yml`](.github/workflows/release.yml), which builds the app (`bun run build:stable`) and uploads the `.exe`/`.zip` from `artifacts/` to that same release as downloadable assets.
+
+For the very first release ever, there's no prior tag to diff from, so add `--first-release`:
+
+```bash
+bun run release -- --first-release --dry-run   # preview first
+bun run release -- --first-release
+```
+
+Versions live in three places kept in sync by `nx release` (`nx.json`'s `release.version.manifestRootsToUpdate`): the root `package.json` (which `electrobun.config.ts` reads for `app.version`), and `apps/app/package.json` / `apps/desktop/package.json` (present only so Nx has a manifest to read/write per project — this is an integrated Nx workspace with no other use for per-project `package.json` files).
+
 ### Known issues
 
 - **Killing `electrobun dev` leaves orphaned processes on Windows** ([electrobun#168](https://github.com/blackboardsh/electrobun/issues/168)): killing the app only kills the top-level `launcher.exe`; the actual `bun.exe` process and its WebView2 tree survive. Two symptoms:
