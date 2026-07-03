@@ -28,7 +28,8 @@
   "scripts": {
     "prepare": "husky",
     "dev": "nx serve desktop",
-    "build:stable": "nx build desktop"
+    "build:stable": "nx build desktop",
+    "release": "nx release --skip-publish"
   },
   "private": true,
   "dependencies": {

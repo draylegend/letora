@@ -39,5 +39,23 @@
       "style": "css",
       "unitTestRunner": "vitest"
     }
+  },
+  "release": {
+    "projects": ["app", "desktop"],
+    "version": {
+      "conventionalCommits": true,
+      "manifestRootsToUpdate": ["."]
+    },
+    "changelog": {
+      "automaticFromRef": true,
+      "workspaceChangelog": {
+        "createRelease": "github"
+      }
+    },
+    "git": {
+      "commit": true,
+      "tag": true,
+      "push": true
+    }
   }
 }

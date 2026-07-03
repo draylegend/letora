@@ -26,4 +26,7 @@ export default {
       bundleCEF: false,
     },
   },
+  release: {
+    baseUrl: 'https://github.com/draylegend/letora/releases/latest/download',
+  },
 } satisfies ElectrobunConfig;
