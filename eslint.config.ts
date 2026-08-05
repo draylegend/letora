@@ -1,5 +1,4 @@
 import nx from '@nx/eslint-plugin';
-import tseslint from '@typescript-eslint/eslint-plugin';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import tailwindcss from 'eslint-plugin-tailwindcss';
 import unusedImports from 'eslint-plugin-unused-imports';
@@ -13,7 +12,6 @@ export default [
   {
     files: ['**/*.ts', '**/*.js'],
     plugins: {
-      '@typescript-eslint': tseslint,
       'simple-import-sort': simpleImportSort,
       'unused-imports': unusedImports,
       tailwindcss,
