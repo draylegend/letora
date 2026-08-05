@@ -52,7 +52,7 @@ export default [
         {
           groups: [
             ['^@?\\w'], // External packages
-            ['^@rollinia'], // Workspace libs
+            ['^@letora'], // Workspace libs
             ['^\\.'], // Relative imports
           ],
         },
