@@ -15,5 +15,5 @@ jobs:
         with:
           bun-version: latest
       - run: bun i --frozen-lockfile
-      - run: bunx nx run-many -t lint test
+      - run: bunx nx run-many -t lint test typecheck
       - run: bunx nx build desktop --configuration=dev
