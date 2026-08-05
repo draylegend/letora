@@ -1,5 +1,12 @@
 {
   "extends": "../../tsconfig.base.json",
-  "compilerOptions": { "lib": ["DOM"] },
+  "compilerOptions": {
+    "lib": ["DOM"],
+    // ponytail: electrobun/bun ships raw .ts source that fails these two
+    // flags (blackboardsh/electrobun#516) — relax here, not workspace-wide.
+    // Drop once that lands upstream.
+    "exactOptionalPropertyTypes": false,
+    "noImplicitReturns": false
+  },
   "include": ["src/**/*.ts"]
 }

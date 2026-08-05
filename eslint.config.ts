@@ -14,23 +14,9 @@ export default [
     plugins: {
       'simple-import-sort': simpleImportSort,
       'unused-imports': unusedImports,
-      tailwindcss,
-    },
-    // Resolved relative to the nearest eslint.config.ts/package.json above
-    // the linted file — that's apps/app/, not the workspace root.
-    settings: {
-      tailwindcss: { cssConfigPath: './src/styles.css' },
     },
     // Override the preset's severities and add the workspace's own rules.
     rules: {
-      'tailwindcss/classnames-order': 'error',
-      'tailwindcss/no-arbitrary-value': 'error',
-      'tailwindcss/no-unnecessary-arbitrary-value': 'error',
-      'tailwindcss/no-custom-classname': [
-        'error',
-        // { whitelist: ['custom\\-*'] },
-      ],
-      'tailwindcss/no-contradicting-classname': 'error',
       '@nx/enforce-module-boundaries': [
         'error',
         {
@@ -61,13 +47,28 @@ export default [
     },
   },
   {
-    files: ['**/*.html'],
+    // Scoped to apps/app: it's the only project with Tailwind CSS.
+    // apps/desktop is a Bun main-process shell with no styles.css to check against.
+    files: ['apps/app/**/*.ts', 'apps/app/**/*.html'],
     plugins: {
       tailwindcss,
     },
     settings: {
       tailwindcss: { cssConfigPath: './src/styles.css' },
     },
+    rules: {
+      'tailwindcss/classnames-order': 'error',
+      'tailwindcss/no-arbitrary-value': 'error',
+      'tailwindcss/no-unnecessary-arbitrary-value': 'error',
+      'tailwindcss/no-custom-classname': [
+        'error',
+        // { whitelist: ['custom\\-*'] },
+      ],
+      'tailwindcss/no-contradicting-classname': 'error',
+    },
+  },
+  {
+    files: ['**/*.html'],
     rules: {
       '@angular-eslint/template/attributes-order': [
         'error',
@@ -83,14 +84,6 @@ export default [
           ],
         },
       ],
-      'tailwindcss/classnames-order': 'error',
-      'tailwindcss/no-arbitrary-value': 'error',
-      'tailwindcss/no-unnecessary-arbitrary-value': 'error',
-      'tailwindcss/no-custom-classname': [
-        'error',
-        // { whitelist: ['custom\\-*'] },
-      ],
-      'tailwindcss/no-contradicting-classname': 'error',
     },
   },
 ];

@@ -15,6 +15,15 @@
         "command": "\"node_modules/.bin/electrobun\" dev"
       }
     },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc -p apps/desktop/tsconfig.json --noEmit"
+      }
+    },
     "build": {
       "executor": "nx:run-commands",
       "dependsOn": [{ "target": "build", "projects": ["app"] }],
