@@ -24,10 +24,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "verbatimModuleSyntax": true,
-    "customConditions": ["@rollinia/source"],
-    "paths": {
-      "@rollinia/ui": ["./libs/ui/src/index.ts"]
-    }
+    "verbatimModuleSyntax": true
   }
 }
