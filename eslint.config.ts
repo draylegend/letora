@@ -16,15 +16,21 @@ export default [
       'unused-imports': unusedImports,
       tailwindcss,
     },
+    // Resolved relative to the nearest eslint.config.ts/package.json above
+    // the linted file — that's apps/app/, not the workspace root.
+    settings: {
+      tailwindcss: { cssConfigPath: './src/styles.css' },
+    },
     // Override the preset's severities and add the workspace's own rules.
     rules: {
-      'tailwindcss/classnames-order': 'warn',
-      'tailwindcss/no-arbitrary-value': 'warn',
+      'tailwindcss/classnames-order': 'error',
+      'tailwindcss/no-arbitrary-value': 'error',
+      'tailwindcss/no-unnecessary-arbitrary-value': 'error',
       'tailwindcss/no-custom-classname': [
-        'warn',
+        'error',
         // { whitelist: ['custom\\-*'] },
       ],
-      'tailwindcss/no-contradicting-classname': 'warn',
+      'tailwindcss/no-contradicting-classname': 'error',
       '@nx/enforce-module-boundaries': [
         'error',
         {
@@ -56,6 +62,12 @@ export default [
   },
   {
     files: ['**/*.html'],
+    plugins: {
+      tailwindcss,
+    },
+    settings: {
+      tailwindcss: { cssConfigPath: './src/styles.css' },
+    },
     rules: {
       '@angular-eslint/template/attributes-order': [
         'error',
@@ -71,6 +83,14 @@ export default [
           ],
         },
       ],
+      'tailwindcss/classnames-order': 'error',
+      'tailwindcss/no-arbitrary-value': 'error',
+      'tailwindcss/no-unnecessary-arbitrary-value': 'error',
+      'tailwindcss/no-custom-classname': [
+        'error',
+        // { whitelist: ['custom\\-*'] },
+      ],
+      'tailwindcss/no-contradicting-classname': 'error',
     },
   },
 ];
